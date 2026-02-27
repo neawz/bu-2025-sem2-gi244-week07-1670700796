@@ -5,11 +5,15 @@ public class SpawnManager : MonoBehaviour
     public Transform spawnPoint;
     public GameObject obstaclePrefab;
 
+    private bool gameOver;
+    GameObject player;
+
     //public PlayerController player;
 
     void Start()
     {
         InvokeRepeating(nameof(Spawn), 0f, 2f);
+        player = GameObject.Find("Player"); 
     }
 
     void Spawn()
@@ -18,10 +22,8 @@ public class SpawnManager : MonoBehaviour
         //{
         //    return;
         //}
-
-        GameObject playerGo = GameObject.Find("Player");
-        PlayerController player = playerGo.GetComponent<PlayerController>();
-        if (player.isGameOver == true)
+        gameOver = player.GetComponent<PlayerController>().isGameOver;
+        if (gameOver == true)
         {
             return;
         }
